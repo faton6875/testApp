@@ -66,7 +66,7 @@ exports.update = (req, res) => {
 
 // Delete a Book by Id
 exports.delete = (req, res) => {
-  const id = req.params.bookId;
+  const id = req.params.catalogId;
   Catalogs.destroy({
     where: { id: id }
   })

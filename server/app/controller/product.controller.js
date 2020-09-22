@@ -32,7 +32,7 @@ exports.findAll = (req, res) => {
 
 // Find a Customer by Id
 exports.findById = (req, res) => {
-  Products.findById(req.params.bookId)
+  Products.findById(req.params.productId)
     .then((book) => {
       res.send(book);
     })
@@ -44,17 +44,15 @@ exports.findById = (req, res) => {
 // Update a Book
 exports.update = (req, res) => {
   var book = req.body;
-  const id = req.params.bookId;
+  const id = req.params.productId;
   Products.update(
     {
-      title: req.body.title,
-      author: req.body.author,
-      description: req.body.description,
-      published: req.body.published
-    },
+      name: req.body.name,
+      brand: req.body.brand,
+      model: req.body.model},
     {
       where: {
-        id: req.params.bookId
+        id: req.params.productId
       }
     }
   )
@@ -68,7 +66,7 @@ exports.update = (req, res) => {
 
 // Delete a Book by Id
 exports.delete = (req, res) => {
-  const id = req.params.bookId;
+  const id = req.params.productId;
   Products.destroy({
     where: { id: id }
   })

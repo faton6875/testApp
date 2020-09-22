@@ -7,11 +7,11 @@ module.exports = function (app) {
   app.get('/api/products', products.findAll);
 
   // Retrieve a single Book by Id
-  app.get('/api/products/:productsId', products.findById);
+  app.get('/api/products/:productId', products.findById);
 
   // Update a Book with Id
-  app.put('/api/products/:productsId', products.update);
+  app.put('/api/products/:productId', products.update);
 
   // Delete a Book with Id
-  app.delete('/api/products/:productsId', products.delete);
+  app.delete('/api/products/:productId', products.delete);
 };
