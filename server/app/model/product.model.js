@@ -8,6 +8,9 @@ module.exports = (sequelize, Sequelize) => {
     },
     model: {
       type: Sequelize.STRING
+    },
+    catalogId: {
+      type: Sequelize.INTEGER
     }
   });
   Product.sync().then(() => {

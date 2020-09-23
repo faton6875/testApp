@@ -1,39 +1,34 @@
 const db = require('../config/db.config.js');
 const Products = db.products;
 
-// Post a Book
 exports.create = (req, res) => {
-  // Save Book to MySQL database
   Products.create({
     name: req.body.name,
     brand: req.body.brand,
-    model: req.body.model
+    model: req.body.model,
+    catalogId: req.params.catalogId
   })
-    .then((book) => {
-      // Send created book to client
-      res.send(book);
+    .then((product) => {
+      res.send(product);
     })
     .catch((err) => {
       res.status(500).send('Error -> ' + err);
     });
 };
 
-// Fetch all Products
 exports.findAll = (req, res) => {
-  Products.findAll()
-    .then((Products) => {
-      // Send all Products to Client
-      res.send(Products);
+  Products.findAll({ where: { catalogId: req.params.catalogId } })
+    .then((product) => {
+      res.send(product);
     })
     .catch((err) => {
       res.status(500).send('Error -> ' + err);
     });
 };
 
-// Find a Customer by Id
 exports.findById = (req, res) => {
   Products.findById(req.params.productId)
-    .then((book) => {
+    .then((product) => {
       res.send(book);
     })
     .catch((err) => {
@@ -41,7 +36,6 @@ exports.findById = (req, res) => {
     });
 };
 
-// Update a Book
 exports.update = (req, res) => {
   var book = req.body;
   const id = req.params.productId;
@@ -49,7 +43,8 @@ exports.update = (req, res) => {
     {
       name: req.body.name,
       brand: req.body.brand,
-      model: req.body.model},
+      model: req.body.model
+    },
     {
       where: {
         id: req.params.productId
@@ -64,7 +59,6 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a Book by Id
 exports.delete = (req, res) => {
   const id = req.params.productId;
   Products.destroy({
