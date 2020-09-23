@@ -11,7 +11,8 @@ const AppRouter = () => (
       <Switch>
         <Route path="/catalogs" component={CatalogList} exact={true} />
         <Route path="/products" component={ProductsList} />
-        <Route path="/add" />
+        <Route path="/product/create" component={ProductForm} />
+        <Route path="/catalog/create" component={CatalogForm} />
         <Route path="/catalog/:id" component={CatalogForm} />
         <Route path="/product/:id" component={ProductForm} />
       </Switch>
