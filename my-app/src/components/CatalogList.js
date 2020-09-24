@@ -1,46 +1,63 @@
 import React from 'react'
-import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-const foo = (e) => console.log(e)
+import BootstrapTable from 'react-bootstrap-table-next'
+const linkFollow = (cell, row, rowIndex, formatExtraData) => {
+  const routName = `/catalog/:${row.id}`
+  return (
+    <>
+      <Button
+        href={routName}
+        onClick={() => {
+          onFollowChanged(row)
+        }}
+      >
+        Редактировать
+      </Button>
+      <Button
+        onClick={() => {
+          onFollowChanged(row)
+        }}
+      >
+        Удалить
+      </Button>
+    </>
+  )
+}
+const products = [
+  { id: 1, name: 'Item 1', price: 100 },
+  { id: 2, name: 'Item 2', price: 102 },
+]
+const columns = [
+  {
+    dataField: 'id',
+    text: 'id',
+    sort: true,
+  },
+  {
+    dataField: 'name',
+    text: 'Name',
+    sort: true,
+  },
+  {
+    dataField: 'price',
+    text: 'Product Price',
+  },
+  {
+    dataField: 'follow',
+    text: 'Follow',
+    formatter: linkFollow,
+    sort: true,
+  },
+]
+
+const onFollowChanged = (row) => {
+  console.log(row)
+}
 
 const CatalogList = (props) => (
   <>
     <Button href="/catalog/create">Создать каталог</Button>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Название</th>
-          <th>Кол-во товара</th>
-          <th>Описание</th>
-          <th>Действия</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <Button href="/catalog/:id" onClick={foo}>
-            Редактировать
-          </Button>
-          <Button> Удалить</Button>
-        </tr>
-        <tr>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <Button> Редактировать </Button>
-          <Button> Удалить</Button>
-        </tr>
-        <tr>
-          <td>Larry the Bird</td>
-          <td>@twitter</td>
-          <td>@twitter</td>
-          <Button> Редактировать </Button>
-          <Button> Удалить</Button>
-        </tr>
-      </tbody>
-    </Table>
+    <BootstrapTable keyField="id" data={products} columns={columns} />
   </>
 )
 export default CatalogList

@@ -9,12 +9,12 @@ const AppRouter = () => (
   <BrowserRouter>
     <div className="container">
       <Switch>
-        <Route path="/catalogs" component={CatalogList} exact={true} />
+        <Route path="/" component={CatalogList} exact={true} />
         <Route path="/products" component={ProductsList} />
         <Route path="/product/create" component={ProductForm} />
         <Route path="/catalog/create" component={CatalogForm} />
-        <Route path="/catalog/:id" component={CatalogForm} />
-        <Route path="/product/:id" component={ProductForm} />
+        <Route path="/catalog/:сatalogId" component={CatalogForm} />
+        <Route path="/product/:productId" component={ProductForm} />
       </Switch>
     </div>
   </BrowserRouter>
